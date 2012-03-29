@@ -24,6 +24,8 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
+#define APPLICATION_SETTINGS_PREFIX     QString("/Application/")
+
 #define QEXTSERIALPORT_URL      QString("http://code.google.com/p/qextserialport/")
 #define OXYGEN_PROJECT_URL      QString("http://www.oxygen-icons.org/")
 
