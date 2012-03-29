@@ -1,0 +1,6 @@
+build*/
+.kdev4/
+*.user
+*.~
+.directory
+.DS_Store

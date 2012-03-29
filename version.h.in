@@ -1,0 +1,10 @@
+#ifndef VERSION_H
+#define VERSION_H
+
+#define VERSION_MAJOR       @VERSION_MAJOR@
+#define VERSION_MINOR       @VERSION_MINOR@
+#define VERSION_REVISION    @VERSION_REVISION@
+
+#define VERSION_STR         "@VERSION@"
+
+#endif
