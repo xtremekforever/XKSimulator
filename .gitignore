@@ -1,6 +1,6 @@
 build*/
 .kdev4/
-*.user
+CMakeLists.txt.user*
 *.~
 .directory
 .DS_Store

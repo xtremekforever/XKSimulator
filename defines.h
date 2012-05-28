@@ -43,7 +43,7 @@ static QString getAboutString()
 
     about += "<br/>XKSimulator is a Qt4 application to simulate<br/>";
     about += "a GPS device by sending NMEA 0183 strings to a USB<br/>";
-    about += "serial emulator or serial port.<br/>";
+    about += "or RS232 serial port.<br/>";
 
     about += "<br/>Special thanks to the <a href=\"" + QEXTSERIALPORT_URL +
              "\">QextSerialPort</a> project<br/>";

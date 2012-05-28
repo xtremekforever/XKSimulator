@@ -5,10 +5,10 @@ cmake_minimum_required(VERSION 2.6)
 add_subdirectory( qextserialport )
 
 set( VERSION_MAJOR     0 )
-set( VERSION_MINOR     0 )
-set( VERSION_REVISION  1 )
+set( VERSION_MINOR     1 )
+set( VERSION_STABILITY "Beta" )
 
-set( VERSION_STR "v${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION}" )
+set( VERSION_STR "v${VERSION_MAJOR}.${VERSION_MINOR}" )
 
 if( CMAKE_BUILD_TYPE STREQUAL "debug" )
     # If we are building in debug mode, we will set the version string
@@ -19,8 +19,8 @@ if( CMAKE_BUILD_TYPE STREQUAL "debug" )
     # Add a definition to indicate that we are in debug mode.
     add_definitions( -DXKSIMULATOR_DEBUG )
 else()
-    set( VERSION "${VERSION_STR}-alpha1" )
-    set( simulator_target xksimulator-${VERSION} )
+    set( VERSION "${VERSION_STR} ${VERSION_STABILITY}" )
+    set( simulator_target xksimulator-${VERSION_STR} )
 endif()
 
 # This command find Qt4 and all required variables
