@@ -1,4 +1,4 @@
-/* This source file is part of the XKManager project */
+/* This source file is part of the XKSimulator project */
 
 /***************************************************************************
    serial.cpp
@@ -6,7 +6,7 @@
    of Alexander Neundorf's CuteCom source code.
 
    Author: Alexander Neundorf <neundorf@kde.org>, modified for
-           XKManager by Jesse L. Zamora <xtremekforever@gmail.com>
+           XKSimulator by Jesse L. Zamora <xtremekforever@gmail.com>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -210,7 +210,7 @@ int SerialPort::currentError()
 
 void SerialPort::dsrChanged(bool status)
 {
-#ifdef XKMANAGER_DEBUG
+#ifdef XKSIMULATOR_DEBUG
     QDateTime time = QDateTime::currentDateTime();
     qDebug() << time.toString("yyyy/MM/dd hh:mm:ss") << ":" << m_port->portName() << "DSR" << (int)status;
 #endif

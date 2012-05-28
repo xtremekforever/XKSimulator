@@ -1,4 +1,4 @@
-/* This header is part of the XKManager project */
+/* This header is part of the XKSimulator project */
 
 /***************************************************************************
    serial.h
@@ -6,7 +6,7 @@
    of Alexander Neundorf's CuteCom source code.
 
    Author: Alexander Neundorf <neundorf@kde.org>, modified for
-           XKManager by Jesse L. Zamora <xtremekforever@gmail.com>
+           XKSimulator by Jesse L. Zamora <xtremekforever@gmail.com>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ class QextSerialPort;
 class SerialPort : public QObject
 {
     Q_OBJECT
-    
+
 public:
     SerialPort();
     ~SerialPort();
@@ -52,7 +52,7 @@ public:
     void open(QString & tty);
 
     QString currentPort() { return m_tty; }
-                       
+
     void write(QByteArray data);
     void writeByte(unsigned char c);
 
@@ -77,7 +77,7 @@ signals:
 private:
     QString m_outputBuffer;
     QByteArray m_cmdBuffer;
-    
+
     QString m_tty;
     char m_buf[SERIAL_BUFSIZE + 1];
     int m_cmd;

@@ -28,6 +28,7 @@
 
 #define QEXTSERIALPORT_URL      QString("http://code.google.com/p/qextserialport/")
 #define OXYGEN_PROJECT_URL      QString("http://www.oxygen-icons.org/")
+#define NMEALIB_PROJECT_URL     QString("http://nmea.sourceforge.net/")
 
 #include "version.h"
 
@@ -38,20 +39,23 @@ static QString getVersionString()
 
 static QString getAboutString()
 {
-    QString about = QString("<b>XKManager %1</b><br/>").arg(getVersionString());
+    QString about = QString("<b>XKSimulator %1</b><br/>").arg(getVersionString());
 
 
-    about += "<br/>XKSimulator is a Qt4 application to simulate<br/>";
-    about += "a GPS device by sending NMEA 0183 strings to a USB<br/>";
-    about += "or RS232 serial port.<br/>";
+    about += "<br/>XKSimulator is a simple GPS simulator written in Qt4.<br/>";
+    about += "It simulates a GPS device by sending NMEA 0183 strings to a<br/>";
+    about += "USB serial emulator or a serial port.<br/>";
 
     about += "<br/>Special thanks to the <a href=\"" + QEXTSERIALPORT_URL +
-             "\">QextSerialPort</a> project<br/>";
-    about += "for their cross-platform serial port libraries.<br/>";
+             "\">QextSerialPort</a> project for their cross-<br/>";
+    about += "platform serial port libraries.<br/>";
 
     about += "<br/>Also, kudos to the <a href=\"" + OXYGEN_PROJECT_URL +
-             "\">Oxygen</a> project for their<br/>";
-    about += "beautiful icons!<br/>";
+             "\">Oxygen</a> project for their beautiful icons!<br/>";
+
+    about += "<br/>And, last but not least, many thanks to Tim (xtimor@gmail.com)<br/>";
+    about += "for his <a href=\"" + NMEALIB_PROJECT_URL + "\">NMEA Library</a> ";
+    about += "for generating NMEA 0183 strings.<br/>";
 
     about += "<br/>Author:<br/>";
     about += "&nbsp;&nbsp;Jesse L. Zamora<br/>";
