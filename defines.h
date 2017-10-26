@@ -34,36 +34,36 @@
 
 static QString getVersionString()
 {
-    return QString("%1").arg(VERSION_STR);
+  return QString("%1").arg(VERSION_STR);
 }
 
 static QString getAboutString()
 {
-    QString about = QString("<b>XKSimulator %1</b><br/>").arg(getVersionString());
+  QString about = QString("<b>XKSimulator %1</b><br/>").arg(getVersionString());
 
 
-    about += "<br/>XKSimulator is a simple GPS simulator written in Qt4.<br/>";
-    about += "It simulates a GPS device by sending NMEA 0183 strings to a<br/>";
-    about += "USB serial emulator or a serial port.<br/>";
+  about += "<br/>XKSimulator is a simple GPS simulator written in Qt4.<br/>";
+  about += "It simulates a GPS device by sending NMEA 0183 strings to a<br/>";
+  about += "USB serial emulator or a serial port.<br/>";
 
-    about += "<br/>Special thanks to the <a href=\"" + QEXTSERIALPORT_URL +
-             "\">QextSerialPort</a> project for their cross-<br/>";
-    about += "platform serial port libraries.<br/>";
+  about += "<br/>Special thanks to the <a href=\"" + QEXTSERIALPORT_URL +
+            "\">QextSerialPort</a> project for their cross-<br/>";
+  about += "platform serial port libraries.<br/>";
 
-    about += "<br/>Also, kudos to the <a href=\"" + OXYGEN_PROJECT_URL +
-             "\">Oxygen</a> project for their beautiful icons!<br/>";
+  about += "<br/>Also, kudos to the <a href=\"" + OXYGEN_PROJECT_URL +
+            "\">Oxygen</a> project for their beautiful icons!<br/>";
 
-    about += "<br/>And, last but not least, many thanks to Tim (xtimor@gmail.com)<br/>";
-    about += "for his <a href=\"" + NMEALIB_PROJECT_URL + "\">NMEA Library</a> ";
-    about += "for generating NMEA 0183 strings.<br/>";
+  about += "<br/>And, last but not least, many thanks to Tim (xtimor@gmail.com)<br/>";
+  about += "for his <a href=\"" + NMEALIB_PROJECT_URL + "\">NMEA Library</a> ";
+  about += "for generating NMEA 0183 strings.<br/>";
 
-    about += "<br/>Author:<br/>";
-    about += "&nbsp;&nbsp;Jesse L. Zamora<br/>";
-    about += "&nbsp;&nbsp;xtremekforever@gmail.com<br/>";
+  about += "<br/>Author:<br/>";
+  about += "&nbsp;&nbsp;Jesse L. Zamora<br/>";
+  about += "&nbsp;&nbsp;xtremekforever@gmail.com<br/>";
 
-    about += "<br/>Copyright (C) 2012 Zamora Studios<br/>";
+  about += "<br/>Copyright (C) 2012 Zamora Studios<br/>";
 
-    return about;
+  return about;
 }
 
 #endif

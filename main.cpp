@@ -29,13 +29,13 @@
 
 int main(int argc, char **argv)
 {
-    QApplication app(argc, argv);
+  QApplication app(argc, argv);
 
-    QCoreApplication::setOrganizationName("Zamora Studios");
-    QCoreApplication::setApplicationName("XKSimulator");
+  QCoreApplication::setOrganizationName("Zamora Studios");
+  QCoreApplication::setApplicationName("XKSimulator");
 
-    MainWindow window;
-    window.show();
+  MainWindow window;
+  window.show();
 
-    return app.exec();
+  return app.exec();
 }

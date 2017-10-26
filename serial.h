@@ -41,50 +41,50 @@ class QextSerialPort;
 
 class SerialPort : public QObject
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    SerialPort();
-    ~SerialPort();
+  SerialPort();
+  ~SerialPort();
 
-    bool isOpen();
-    void close();
-    void open(QString & tty);
+  bool isOpen();
+  void close();
+  void open(QString & tty);
 
-    QString currentPort() { return m_tty; }
+  QString currentPort() { return m_tty; }
 
-    void write(QByteArray data);
-    void writeByte(unsigned char c);
+  void write(QByteArray data);
+  void writeByte(unsigned char c);
 
-    void setMode(int mode) { m_serial_mode = mode; }
+  void setMode(int mode) { m_serial_mode = mode; }
 
-    bool detectError();
+  bool detectError();
 
-    int currentError();
+  int currentError();
 
-    void run();
+  void run();
 public slots:
-    void read();
-    void dsrChanged(bool);
+  void read();
+  void dsrChanged(bool);
 
 signals:
-    void readLine(QString data);
-    void readCmd(QByteArray& data);
+  void readLine(QString data);
+  void readCmd(QByteArray& data);
 
-    void serialError(QString errorStr);
-    void serialStatus(QString status);
+  void serialError(QString errorStr);
+  void serialStatus(QString status);
 
 private:
-    QString m_outputBuffer;
-    QByteArray m_cmdBuffer;
+  QString m_outputBuffer;
+  QByteArray m_cmdBuffer;
 
-    QString m_tty;
-    char m_buf[SERIAL_BUFSIZE + 1];
-    int m_cmd;
+  QString m_tty;
+  char m_buf[SERIAL_BUFSIZE + 1];
+  int m_cmd;
 
-    int m_serial_mode;
+  int m_serial_mode;
 
-    QextSerialPort * m_port;
+  QextSerialPort * m_port;
 };
 
 #endif
