@@ -75,7 +75,6 @@ set ( nmea_sources
 
 # Now these are the sources for the actual XKManager project
 set ( simulator_sources
-    travelline.cpp
     serial.cpp
     mainwindow.cpp
     main.cpp
