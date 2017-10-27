@@ -150,6 +150,11 @@ void MainWindow::loadComPorts()
 #else
 
 #ifdef Q_OS_LINUX
+    // Skip all ports ttyS10 - ttyS31
+    if (name.size() == 6 && name.contains("ttyS")) {
+      continue;
+    }
+
     name.prepend("/dev/");
 #endif
 
