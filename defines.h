@@ -61,7 +61,7 @@ static QString getAboutString()
   about += "&nbsp;&nbsp;Jesse L. Zamora<br/>";
   about += "&nbsp;&nbsp;xtremekforever@gmail.com<br/>";
 
-  about += "<br/>Copyright (C) 2012 Zamora Studios<br/>";
+  about += "<br/>Copyright (C) 2017 XKSimulator<br/>";
 
   return about;
 }

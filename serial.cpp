@@ -92,7 +92,7 @@ void SerialPort::open(QString & tty)
 
   m_port->setPortName(tty);
   if (m_port->open(QIODevice::ReadWrite)) {
-    m_port->setBaudRate(BAUD9600);
+    m_port->setBaudRate(BAUD115200);
     m_port->setDataBits(DATA_8);
     m_port->setParity(PAR_NONE);
     m_port->setStopBits(STOP_1);
