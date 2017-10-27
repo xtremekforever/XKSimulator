@@ -70,6 +70,9 @@ MainWindow::MainWindow(QWidget *parent) :
   // Load the list of available serial ports
   loadComPorts();
 
+  // Load supported baudrates
+  loadBaudRates();
+
   m_serial->open(m_tty);                                        // Open the selected serial port
 }
 
@@ -195,6 +198,53 @@ void MainWindow::loadComPorts()
   ui->menuFile->addAction(ui->actionQuit);
 }
 
+void MainWindow::loadBaudRates()
+{
+  m_baudRates = new QActionGroup(this);
+  m_baudRates->setExclusive(true);
+
+  QAction * action;
+
+  action = new QAction("1200", this);
+  action->setCheckable(true);
+  m_baudRates->addAction(action);
+
+  action = new QAction("2400", this);
+  action->setCheckable(true);
+  m_baudRates->addAction(action);
+
+  action = new QAction("4800", this);
+  action->setCheckable(true);
+  m_baudRates->addAction(action);
+
+  action = new QAction("9600", this);
+  action->setCheckable(true);
+  action->setChecked(true);
+  m_baudRates->addAction(action);
+
+  action = new QAction("19200", this);
+  action->setCheckable(true);
+  m_baudRates->addAction(action);
+
+  action = new QAction("38400", this);
+  action->setCheckable(true);
+  m_baudRates->addAction(action);
+
+  action = new QAction("57600", this);
+  action->setCheckable(true);
+  m_baudRates->addAction(action);
+
+  action = new QAction("115200", this);
+  action->setCheckable(true);
+  m_baudRates->addAction(action);
+
+  connect(m_baudRates, SIGNAL(triggered(QAction*)),
+          this, SLOT(baudRateAction_triggered(QAction*)));
+
+  ui->menuBaud->addActions(m_baudRates->actions());
+  ui->menuFile->addSeparator();
+}
+
 void MainWindow::comAction_triggered(QAction * action)
 {
   m_tty = action->toolTip();
@@ -209,6 +259,11 @@ void MainWindow::comAction_triggered(QAction * action)
 void MainWindow::on_actionRefresh_triggered()
 {
   loadComPorts();
+}
+
+void MainWindow::baudRateAction_triggered(QAction * action)
+{
+  m_serial->setBaud(action->text().toInt());
 }
 
 void MainWindow::serialError(QString error)

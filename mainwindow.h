@@ -50,6 +50,7 @@ public:
 
 protected:
   void loadComPorts();
+  void loadBaudRates();
 
   void loadAppSettings();
   void saveAppSettings();
@@ -66,6 +67,8 @@ private slots:
   void comAction_triggered(QAction * action);
   void on_actionRefresh_triggered();
 
+  void baudRateAction_triggered(QAction * action);
+
   void on_speedSpinBox_valueChanged(int i);
   void on_bearingSpinBox_valueChanged(int i);
 
@@ -77,14 +80,15 @@ private slots:
   void gpsTimer();
 
 private:
-  Ui::MainWindow *ui;
+  Ui::MainWindow *  ui;
 
-  QLabel          *m_error;
+  QLabel *          m_error;
 
-  QString         m_tty;
+  QString           m_tty;
 
-  SerialPort      *m_serial;
-  QActionGroup    *m_comPorts;
+  SerialPort *      m_serial;
+  QActionGroup *    m_comPorts;
+  QActionGroup *    m_baudRates;
 
   QextSerialEnumerator * m_enum;
 

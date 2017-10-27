@@ -52,6 +52,17 @@ SerialPort::SerialPort()
   m_cmd = 0;
   m_serial_mode = SERIAL_MODE_TEXT;
   m_port = new QextSerialPort();
+
+  // Setup default connection params
+  m_port->setBaudRate(BAUD9600);
+  m_port->setDataBits(DATA_8);
+  m_port->setParity(PAR_NONE);
+  m_port->setStopBits(STOP_1);
+  m_port->setFlowControl(FLOW_OFF);
+  m_port->setTimeout(10);
+  m_port->setRts(true);
+  m_port->setDtr(true);
+
   connect(m_port, SIGNAL(readyRead()), this, SLOT(read()));
   connect(m_port, SIGNAL(dsrChanged(bool )), this, SLOT(dsrChanged(bool )));
 }
@@ -92,15 +103,6 @@ void SerialPort::open(QString & tty)
 
   m_port->setPortName(tty);
   if (m_port->open(QIODevice::ReadWrite)) {
-    m_port->setBaudRate(BAUD115200);
-    m_port->setDataBits(DATA_8);
-    m_port->setParity(PAR_NONE);
-    m_port->setStopBits(STOP_1);
-    m_port->setFlowControl(FLOW_OFF);
-    m_port->setTimeout(10);
-    m_port->setRts(true);
-    m_port->setDtr(true);
-
     serialStatus(QString("%1 is open").arg(tty));
   } else {
     serialError(QString("Error opening %1").arg(tty));
@@ -108,6 +110,37 @@ void SerialPort::open(QString & tty)
   }
 
   detectError();
+}
+
+void SerialPort::setBaud(int baud)
+{
+  BaudRateType rate;
+
+  switch (baud) {
+  case 1200:    rate = BAUD1200;    break;
+  case 2400:    rate = BAUD2400;    break;
+  case 4800:    rate = BAUD4800;    break;
+  case 9600:    rate = BAUD9600;    break;
+  case 19200:   rate = BAUD19200;   break;
+  case 38400:   rate = BAUD38400;   break;
+  case 57600:   rate = BAUD57600;   break;
+  case 115200:  rate = BAUD115200;  break;
+  default:      return;
+  }
+
+  // Close port if open
+  bool portOpen = m_port->isOpen();
+  if (portOpen) {
+    close();
+  }
+
+  // Change baudrate
+  m_port->setBaudRate(rate);
+
+  // Open again if it was open
+  if (portOpen) {
+    open(m_tty);
+  }
 }
 
 void SerialPort::write(QByteArray data)

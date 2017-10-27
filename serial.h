@@ -57,6 +57,7 @@ public:
   void writeByte(unsigned char c);
 
   void setMode(int mode) { m_serial_mode = mode; }
+  void setBaud(int baud);
 
   bool detectError();
 
