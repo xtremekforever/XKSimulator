@@ -80,7 +80,6 @@ MainWindow::~MainWindow()
 {
   saveAppSettings();
 
-  delete m_enum;
   delete m_serial;
 
   delete ui;
@@ -177,15 +176,18 @@ void MainWindow::loadComPorts()
     }
 #endif
 
-    QAction * com = new QAction(fullName, this);
-    com->setToolTip(name);
-    com->setCheckable(true);
-
-    if (com->toolTip() == m_tty) {
-      com->setChecked(true);
+    // Port must have a name to be added
+    if (fullName.size() > 0) {
+      QAction * com = new QAction(fullName, this);
+      com->setToolTip(name);
+      com->setCheckable(true);
+  
+      if (com->toolTip() == m_tty) {
+        com->setChecked(true);
+      }
+  
+      m_comPorts->addAction(com);
     }
-
-    m_comPorts->addAction(com);
   }
 
   connect(m_comPorts, SIGNAL(triggered(QAction*)),
@@ -286,7 +288,6 @@ void MainWindow::serialStatus(QString status)
   m_error->setText(status);
   m_error->setStyleSheet("QLabel { color : black; }");
 }
-
 
 void MainWindow::on_actionAbout_triggered(bool )
 {
