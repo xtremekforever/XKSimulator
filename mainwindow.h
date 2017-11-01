@@ -38,6 +38,8 @@ class QTimer;
 
 class QextSerialEnumerator;
 
+class TravelLine;
+
 class SerialPort;
 
 class MainWindow : public QMainWindow
@@ -95,6 +97,8 @@ private:
   // GPS Stuff
   QTimer * m_gpsTimer;
   nmeaINFO m_info;
+
+  QList<TravelLine> m_lines;
 };
 
 #endif // MAINWINDOW_H

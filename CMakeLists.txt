@@ -75,9 +75,10 @@ set ( nmea_sources
 
 # Now these are the sources for the actual XKManager project
 set ( simulator_sources
-  serial.cpp
-  mainwindow.cpp
   main.cpp
+  mainwindow.cpp
+  serial.cpp
+  travelline.cpp
   ${nmea_sources}
 )
 
@@ -87,8 +88,8 @@ set ( simulator_headers
 )
 
 set ( simulator_moc_headers
-  mainwindow.h
   serial.h
+  mainwindow.h
 )
 
 set ( simulator_ui_files
