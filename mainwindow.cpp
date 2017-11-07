@@ -37,6 +37,7 @@
 
 #include "defines.h"
 #include "serial.h"
+#include "travelline.h"
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -80,7 +81,6 @@ MainWindow::~MainWindow()
 {
   saveAppSettings();
 
-  delete m_enum;
   delete m_serial;
 
   delete ui;
@@ -177,15 +177,18 @@ void MainWindow::loadComPorts()
     }
 #endif
 
-    QAction * com = new QAction(fullName, this);
-    com->setToolTip(name);
-    com->setCheckable(true);
-
-    if (com->toolTip() == m_tty) {
-      com->setChecked(true);
+    // Port must have a name to be added
+    if (fullName.size() > 0) {
+      QAction * com = new QAction(fullName, this);
+      com->setToolTip(name);
+      com->setCheckable(true);
+  
+      if (com->toolTip() == m_tty) {
+        com->setChecked(true);
+      }
+  
+      m_comPorts->addAction(com);
     }
-
-    m_comPorts->addAction(com);
   }
 
   connect(m_comPorts, SIGNAL(triggered(QAction*)),
@@ -287,7 +290,6 @@ void MainWindow::serialStatus(QString status)
   m_error->setStyleSheet("QLabel { color : black; }");
 }
 
-
 void MainWindow::on_actionAbout_triggered(bool )
 {
   QMessageBox::about(this, "About XKSimulator", getAboutString());
@@ -299,8 +301,18 @@ void MainWindow::on_actionAboutQt_triggered(bool )
 }
 
 void MainWindow::speedOrBearingUpdated()
-{
-  
+{  
+  if (m_lines.size() > 0) {
+    // End the last speed for time
+    m_lines.last().end();
+  }
+
+  if (m_info.speed > 0) {
+    // Add a new speed for time
+    TravelLine st(m_info.speed, m_info.direction);
+    st.start();
+    m_lines.append(st);
+  }
 }
 
 void MainWindow::on_speedSpinBox_valueChanged(int i)
@@ -354,6 +366,33 @@ void MainWindow::sendGpsInfo()
 
 void MainWindow::gpsTimer()
 {
+  if (m_info.speed > 0) {
+    m_lines.last().end();
+  }
+
+  double total_distance = 0.0;
+  foreach(TravelLine line, m_lines) {
+    // Get the new position
+    _nmeaPOS startPos;
+    _nmeaPOS endPos;
+
+    // First get the start position
+    nmea_info2pos(&m_info, &startPos);
+
+    // Calculate the new position based on the bearing and distance
+    nmea_move_horz(&startPos, &endPos, line.bearing(), line.distance() / 1000.0);
+
+    // Update the info struct
+    nmea_pos2info(&endPos, &m_info);
+
+    total_distance += line.distance();
+  }
+  m_lines.clear();
+
+#ifdef XKSIMULATOR_DEBUG
+  qDebug() << "Distance Traveled:" << total_distance;
+#endif
+
   double lat = nmea_ndeg2degree(m_info.lat);
   double lon = nmea_ndeg2degree(m_info.lon);
 
@@ -378,6 +417,13 @@ void MainWindow::gpsTimer()
 
   // Finally send the GPS info
   sendGpsInfo();
+
+  // Calculate the speed again
+  if (m_info.speed > 0) {
+    TravelLine line(m_info.speed, m_info.direction);
+    line.start();
+    m_lines.append(line);
+  }
 }
 
 void MainWindow::startSending()
@@ -407,6 +453,13 @@ void MainWindow::startSending()
 
   m_info.satinfo.inuse = 8;
   m_info.satinfo.inview = 12;
+
+  // Create the first speed for time
+  if (m_info.speed > 0) {
+    TravelLine line(m_info.speed, m_info.direction);
+    line.start();
+    m_lines.append(line);
+  }
 
   // Start the GPS timer
   m_gpsTimer->start(1000);
