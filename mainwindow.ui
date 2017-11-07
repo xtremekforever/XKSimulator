@@ -91,6 +91,9 @@
            <property name="decimals">
             <number>6</number>
            </property>
+           <property name="maximum">
+            <double>90.000000000000000</double>
+           </property>
           </widget>
          </item>
          <item row="1" column="2">
@@ -103,6 +106,9 @@
            </property>
            <property name="decimals">
             <number>6</number>
+           </property>
+           <property name="maximum">
+            <double>180.000000000000000</double>
            </property>
           </widget>
          </item>
